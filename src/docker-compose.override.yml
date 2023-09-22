@@ -4,3 +4,14 @@ services:
   spaceweather.sync:
     environment:
       DOTNET_ENVIRONMENT: Development
+
+  spaceweather.bootstrap:
+    environment:
+      DOTNET_ENVIRONMENT: Development
+
+  spaceweather.db:
+    environment:
+      MARIADB_ROOT_PASSWORD: spaceweather_root
+      MARIADB_PASSWORD: spaceweather_dev
+    ports:
+      - 3306:3306

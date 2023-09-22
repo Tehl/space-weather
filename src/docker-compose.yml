@@ -6,3 +6,26 @@ services:
     build:
       context: .
       dockerfile: SpaceWeather.Sync/Dockerfile
+    depends_on:
+      spaceweather.db:
+        condition: service_healthy
+
+  spaceweather.bootstrap:
+    image: ${DOCKER_REGISTRY-}spaceweatherbootstrap
+    build:
+      context: .
+      dockerfile: SpaceWeather.Bootstrap/Dockerfile
+    depends_on:
+      spaceweather.db:
+        condition: service_healthy
+
+  spaceweather.db:
+    image: mariadb
+    environment:
+      MARIADB_DATABASE: spaceweather
+      MARIADB_USER: spaceweather
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh --connect --innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
