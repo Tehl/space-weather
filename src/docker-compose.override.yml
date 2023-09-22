@@ -1,0 +1,6 @@
+version: '3.4'
+
+services:
+  spaceweather.sync:
+    environment:
+      DOTNET_ENVIRONMENT: Development

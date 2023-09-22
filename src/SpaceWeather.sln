@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceWeather.Sync", "SpaceWeather.Sync\SpaceWeather.Sync.csproj", "{0C2904D9-0F31-4EF4-A344-0C546E0440F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceWeather.Domain", "SpaceWeather.Domain\SpaceWeather.Domain.csproj", "{6DBD5379-67B1-4908-9423-41F41A66B47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceWeather.Domain", "SpaceWeather.Domain\SpaceWeather.Domain.csproj", "{6DBD5379-67B1-4908-9423-41F41A66B47C}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C0FAE358-C614-43B4-B70F-AF50309C4022}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6DBD5379-67B1-4908-9423-41F41A66B47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DBD5379-67B1-4908-9423-41F41A66B47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DBD5379-67B1-4908-9423-41F41A66B47C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FAE358-C614-43B4-B70F-AF50309C4022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FAE358-C614-43B4-B70F-AF50309C4022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FAE358-C614-43B4-B70F-AF50309C4022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FAE358-C614-43B4-B70F-AF50309C4022}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
