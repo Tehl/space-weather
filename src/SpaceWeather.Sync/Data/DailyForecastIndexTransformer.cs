@@ -1,12 +1,13 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
 using SpaceWeather.Domain.Models;
+using SpaceWeather.Sync.Pipeline;
 
-namespace SpaceWeather.Sync.Readers;
+namespace SpaceWeather.Sync.Data;
 
-internal partial class DailyForecastIndexReader
+internal partial class DailyForecastIndexTransformer : IDataTransformer<string, MagneticIndexReading>
 {
-    public MagneticIndexReading[] ReadIndices(string rawData)
+    public MagneticIndexReading[] Transform(string rawData)
     {
         var kpData = KpDataPattern().Match(rawData);
         if (!kpData.Success)

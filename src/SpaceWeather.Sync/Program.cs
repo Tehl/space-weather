@@ -1,31 +1,25 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using SpaceWeather.Domain.Context;
 using SpaceWeather.Domain.IoC;
-using SpaceWeather.Sync.Readers;
+using SpaceWeather.Sync.IoC;
+using SpaceWeather.Sync.Pipeline;
 using SpaceWeather.Sync.SwpcApi;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
-        _ = services.AddHttpClient<ISwpcApiClient, SwpcApiClient>((s, client) =>
-        {
-            var options = s.GetRequiredService<IOptions<SwpcApiOptions>>().Value;
-            client.BaseAddress = new Uri(options.BaseAddress);
-        });
+        _ = services.AddApplicationServices();
+        _ = services.AddSpaceWeatherDbContext("SpaceWeather");
 
         _ = services.Configure<SwpcApiOptions>(context.Configuration.GetSection("SwpcApi"));
-
-        _ = services.AddSpaceWeatherDbContext("SpaceWeather");
     })
     .Build();
 
-var apiClient = host.Services.GetRequiredService<ISwpcApiClient>();
+using (var scope = host.Services.CreateScope())
+{
+    foreach (var pipeline in scope.ServiceProvider.GetServices<IDataPipeline>())
+    {
+        await pipeline.ExecuteAsync();
+    }
+}
 
-var forecastData = await apiClient.GetDailyForecastDataAsync();
-
-var indices = new DailyForecastIndexReader().ReadIndices(forecastData);
-
-using var scope = host.Services.CreateScope();
-var dbContext = scope.ServiceProvider.GetRequiredService<SpaceWeatherDbContext>();
