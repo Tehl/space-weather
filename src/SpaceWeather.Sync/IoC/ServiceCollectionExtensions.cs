@@ -22,6 +22,9 @@ internal static class ServiceCollectionExtensions
             .AddScoped<DailyForecastIndexSource>()
             .AddScoped<DailyForecastIndexTransformer>()
             .AddScoped<IDataPipeline, DailyForecastIndexPipeline>()
+            .AddScoped<DailyRecordedIndexSource>()
+            .AddScoped<DailyRecordedIndexTransformer>()
+            .AddScoped<IDataPipeline, DailyRecordedIndexPipeline>()
             .AddScoped<IDataRepository<MagneticIndexReading>, MagneticIndexRepository>();
     }
 }

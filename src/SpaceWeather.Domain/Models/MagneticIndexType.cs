@@ -2,5 +2,6 @@
 
 public enum MagneticIndexType : byte
 {
-    K = 0
+    K = 0,
+    A = 1,
 }
