@@ -14,7 +14,7 @@ internal partial class DailyRecordedIndexTransformer : IDataTransformer<string, 
 
     public MagneticIndexReading[] Transform(string rawData)
     {
-        var rows = rawData.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var rows = rawData.SplitLines();
 
         var readings = new List<MagneticIndexReading>(rows.Length);
 
