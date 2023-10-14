@@ -5,7 +5,8 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "spaceweather.sync": "StartDebugging",
-        "spaceweather.bootstrap": "StartDebugging"
+        "spaceweather.bootstrap": "StartDebugging",
+        "spaceweather.api": "StartDebugging"
       }
     }
   }

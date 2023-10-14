@@ -19,6 +19,15 @@ services:
       spaceweather.db:
         condition: service_healthy
 
+  spaceweather.api:
+    image: ${DOCKER_REGISTRY-}spaceweatherapi
+    build:
+      context: .
+      dockerfile: SpaceWeather.Api/Dockerfile
+    depends_on:
+      spaceweather.db:
+        condition: service_healthy
+
   spaceweather.db:
     image: mariadb
     environment:

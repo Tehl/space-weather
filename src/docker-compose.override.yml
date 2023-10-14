@@ -9,6 +9,12 @@ services:
     environment:
       DOTNET_ENVIRONMENT: Development
 
+  spaceweather.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
   spaceweather.db:
     environment:
       MARIADB_ROOT_PASSWORD: spaceweather_root
