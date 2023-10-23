@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using SpaceWeather.Api.Repository;
 using SpaceWeather.Domain.Models;
@@ -19,6 +20,7 @@ public class MagneticIndexReadingController : Controller
 
     [HttpGet]
     [Route("{station}/{type}")]
+    [ProducesResponseType(typeof(MagneticIndexReading[]), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> Search(
         [Required] MeasurementStation station,
         [Required] MagneticIndexType type,
