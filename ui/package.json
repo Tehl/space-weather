@@ -1,0 +1,23 @@
+{
+  "name": "space-weather-ui",
+  "version": "1.0.0",
+  "description": "UI to display data from the Space Weather API",
+  "author": "Tehl",
+  "license": "MIT",
+  "source": "src/index.html",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build",
+    "format": "prettier --write ./src"
+  },
+  "dependencies": {
+    "highcharts": "11.2.0",
+    "luxon": "3.4.3",
+    "reset-css": "5.0.2"
+  },
+  "devDependencies": {
+    "parcel": "2.10.1",
+    "prettier": "3.0.3"
+  }
+}
