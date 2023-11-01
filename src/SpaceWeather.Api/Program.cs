@@ -8,6 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationServices();
 builder.Services.AddSpaceWeatherDbContext("SpaceWeather");
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        _ = policy.AllowAnyOrigin();
+    });
+});
+
 builder.Services
     .AddControllers(options =>
     {
@@ -29,10 +37,12 @@ if (app.Environment.IsDevelopment())
     _ = app.UseSwaggerUI();
 }
 
-app.UseAuthorization();
-
 app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseRouting();
+
+app.UseCors();
+app.UseAuthorization();
 
 app.MapControllers();
 
