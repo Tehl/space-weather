@@ -32,6 +32,7 @@ WORKDIR /app
 COPY exec/ exec/
 COPY --from=build-app /app/publish .
 COPY --from=build-ui /src/dist ./api/wwwroot
+RUN chmod a+x /app/exec/entrypoint.sh
 ENTRYPOINT ["./exec/entrypoint.sh"]
 CMD cron \
     && cd /app/api \
