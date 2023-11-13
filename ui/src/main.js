@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       "Planetary",
       "K",
       startTime,
-      now,
+      endTime,
     )
   ).map(parseIndexReading);
 

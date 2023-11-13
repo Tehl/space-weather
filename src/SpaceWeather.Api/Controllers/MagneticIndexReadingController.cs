@@ -10,12 +10,15 @@ namespace SpaceWeather.Api.Controllers;
 public class MagneticIndexReadingController : Controller
 {
     private readonly IMagneticIndexRepository _repository;
+    private readonly ILogger<MagneticIndexReadingController> _logger;
 
     public MagneticIndexReadingController(
-        IMagneticIndexRepository repository
+        IMagneticIndexRepository repository,
+        ILogger<MagneticIndexReadingController> logger
     )
     {
         _repository = repository;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -36,6 +39,15 @@ public class MagneticIndexReadingController : Controller
         var results = await _repository.GetReadingsAsync(
             station,
             type,
+            fromTimestamp,
+            toTimestamp
+        );
+
+        _logger.LogInformation(
+            "Got {count} {type}-index readings for station {station} between {fromTimestamp} and {toTimestamp}",
+            results.Length,
+            type,
+            station,
             fromTimestamp,
             toTimestamp
         );
