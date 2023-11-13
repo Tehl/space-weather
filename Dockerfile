@@ -20,7 +20,18 @@ COPY ["ui/src", "src"]
 RUN npm run build
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+RUN apt-get update && \
+	apt-get install --no-install-recommends -y \
+    cron
+RUN touch /tmp/env.txt /tmp/sync.log \
+    && echo "15,45 * * * *    . /tmp/env.txt; cd /app/sync && dotnet SpaceWeather.Sync.dll 2>&1 > /tmp/sync.log" > /etc/cron.d/spaceweather \
+    && crontab /etc/cron.d/spaceweather
+    
 WORKDIR /app
+COPY exec/ exec/
 COPY --from=build-app /app/publish .
-COPY --from=build-ui /src/dist ./wwwroot
-ENTRYPOINT ["dotnet", "api/SpaceWeather.Api.dll"]
+COPY --from=build-ui /src/dist ./api/wwwroot
+ENTRYPOINT ["./exec/entrypoint.sh"]
+CMD cron \
+    && cd /app/api \
+    && (dotnet SpaceWeather.Api.dll 2>&1 > /tmp/api.log & tail -f /tmp/sync.log /tmp/api.log)

@@ -13,7 +13,7 @@ if (module.hot) {
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-  const apiClient = new ApiClient("http://localhost:62944/api");
+  const apiClient = new ApiClient("/api");
 
   const now = DateTime.utc();
   const startTime = now.minus({ days: 3 }).startOf("day");

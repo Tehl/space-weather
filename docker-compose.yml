@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  spaceweather:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__SpaceWeather=Server=spaceweather.db;Port=3306;Database=spaceweather;UID=spaceweather;PWD=spaceweather_dev
+    ports:
+      - "8080:80"
+    depends_on:
+      spaceweather.db:
+        condition: service_healthy
+
+  spaceweather.db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: spaceweather_root
+      MARIADB_DATABASE: spaceweather
+      MARIADB_USER: spaceweather
+      MARIADB_PASSWORD: spaceweather_dev
+    healthcheck:
+      test: ["CMD-SHELL", "healthcheck.sh --connect --innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
