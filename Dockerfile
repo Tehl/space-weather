@@ -20,6 +20,7 @@ COPY ["ui/src", "src"]
 RUN npm run build
 
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+EXPOSE 80
 ENV TZ UTC
 RUN apt-get update && \
 	apt-get install --no-install-recommends -y \
