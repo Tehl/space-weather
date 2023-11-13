@@ -23,7 +23,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
 EXPOSE 80
 ENV TZ UTC
 RUN apt-get update && \
-	apt-get install --no-install-recommends -y \
+    apt-get install --no-install-recommends -y \
     cron
 RUN touch /tmp/env.txt /tmp/sync.log \
     && echo "15,45 * * * *    . /tmp/env.txt; cd /app/sync && dotnet SpaceWeather.Sync.dll 2>&1 > /tmp/sync.log" > /etc/cron.d/spaceweather \
